@@ -19,12 +19,12 @@
             }
         ],
         "dfp": {
-            "name": "",
-            "semverRange": ""
+            "name": "AVR-Ex_DFP",
+            "semverRange": "^1.0.38"
         },
         "configurator": {
-            "name": "",
-            "semverRange": ""
+            "name": "MCC",
+            "semverRange": ">=5.0.3"
         },
         "device": {
             "metaDataVersion": "1.0.0",
@@ -37,7 +37,7 @@
             }
         },
         "author": "Prasad Aradhya",
-        "peripherals": [],
+        "peripherals": ["USART"],
         "keywords": [],
         "additionalData": {
             "longDescription": {

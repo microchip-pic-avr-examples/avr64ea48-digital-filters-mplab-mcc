@@ -23,13 +23,10 @@ The Kalman filter, also called linear quadratic estimation (LQE), is an algorith
     
 ## Related Documentation
 
----- FILL RELATED DOCS ---  
----- FILL RELATED DOCS ---  
----- FILL RELATED DOCS ---  
----- FILL RELATED DOCS ---  
----- FILL RELATED DOCS ---  
----- FILL RELATED DOCS ---  
-
+- [The Road to Median Filter Mastery](https://blog.eddyfi.com/en/the-road-to-median-filter-mastery)
+- [FFT Visualization and Explanation](https://www.karlsims.com/fft.html)
+- [Digital Filters and IIR](http://musicweb.ucsd.edu/~trsmyth/filters/Digital_Filters.html)
+- [Kalman Filter For Dummies](http://bilgin.esme.org/BitsAndBytes/KalmanFilterforDummies)
 
 
 ## Software Used
@@ -55,6 +52,6 @@ The Kalman filter, also called linear quadratic estimation (LQE), is an algorith
 <!-- Explain how to operate the example. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
 
 ## Summary
-After going through these use cases, you should better understand how to use the mentioned filters in an AVR context. This includes how this can be used together with the MPLAB® Code Configurator called Melody.
+After going through these use cases, you should better understand how to use the mentioned filters in an AVR context. This includes how this can be used together with the MPLAB® Code Configurator called Melody and also measuring the speed of the filters.
 
 

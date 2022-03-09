@@ -10,7 +10,7 @@
         "shortDescription": "Demo of digital filters median IIR FFT and Kalman on AVR EA microcontrollerusing MPLAB X",
         "ide": {
             "name": "MPLAB X",
-            "semverRange": ">=5.50.0"
+            "semverRange": ">=6.0.0"
         },
         "compiler": [
             {
@@ -20,7 +20,7 @@
         ],
         "dfp": {
             "name": "AVR-Ex_DFP",
-            "semverRange": "^1.0.38"
+            "semverRange": "^2.0.44"
         },
         "configurator": {
             "name": "MCC",
@@ -36,7 +36,7 @@
                 "versionRange": "*"
             }
         },
-        "author": "Prasad Aradhya",
+        "author": "Bjørnar Moe Remmen, Lloyd Clark, Martin Thomaz, Phillip Olk and Martin Mostad",
         "peripherals": ["USART"],
         "keywords": [],
         "additionalData": {

@@ -106,7 +106,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="AVR-Ex_DFP" vendor="Microchip" version="1.0.38"/>
+        <pack name="AVR-Ex_DFP" vendor="Microchip" version="2.0.44"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>

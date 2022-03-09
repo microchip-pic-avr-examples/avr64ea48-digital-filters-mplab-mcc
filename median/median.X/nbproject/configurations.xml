@@ -100,13 +100,13 @@
         <targetDevice>AVR64EA48</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>nEdbgTool</platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.32</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="AVR-Ex_DFP" vendor="Microchip" version="1.0.38"/>
+        <pack name="AVR-Ex_DFP" vendor="Microchip" version="2.0.44"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -220,6 +220,8 @@
         <property key="communication.activationmode" value="nohv"/>
         <property key="communication.interface" value="updi"/>
         <property key="communication.speed" value="0,500"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
@@ -284,6 +286,8 @@
         <property key="communication.activationmode" value="nohv"/>
         <property key="communication.interface" value="updi"/>
         <property key="communication.speed" value="0,500"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
@@ -304,10 +308,7 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-7fff"/>
-        <property key="memories.rww" value="true"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/Users/M53740/OneDrive - Microchip Technology Inc/Documents/Projects/Work/id02-filters/median/median.X/debug/free/median_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"

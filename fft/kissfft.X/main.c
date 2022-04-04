@@ -75,7 +75,7 @@ int main(void)
             watch_imag = cpx_out[n].i;
 
             //Calculating the power spectrum
-            pwr = sqrt(cpx_out[n].r * cpx_out[n].r + cpx_out[n].i + cpx_out[n].i);
+            pwr = sqrt(cpx_out[n].r * cpx_out[n].r + cpx_out[n].i * cpx_out[n].i);
 
 
             //Writing four variables to USART, so they can be read by MPLAB DV:

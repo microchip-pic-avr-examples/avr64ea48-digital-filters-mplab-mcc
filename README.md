@@ -45,7 +45,7 @@ The Kalman filter, also called linear quadratic estimation (LQE), is an algorith
 ## Setup
 
 <!-- Explain how to connect hardware and set up software. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
-All code examples were created using an AVR64EA48 Curiosity Nano Evaluation Kit and the MPLAB X IDE. Refer to the AVR128DB48 Curiosity Nano Hardware User Guide for using the evaluation kit together with the IDE.
+All code examples were created using an AVR64EA48 Curiosity Nano Evaluation Kit and the MPLAB X IDE. Refer to the AVR64EA48 Curiosity Nano Hardware User Guide for using the evaluation kit together with the IDE.
 
 ## Operation
 

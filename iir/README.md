@@ -2,7 +2,7 @@
 # IIR Filter
 
 Infinite Impulse Response (IIR) filters are feedback-based filters, i.e., the previous output plays a role in the current output. Due to the feedback principle, these filters lose the phase information and might be unstable, so they are not always the first choice for audio applications. But for sensor readings, they can be a great tool. For this code example, a simple and flexible implementation of IIR was chosen, with emphasis on ease of use.
-For the math behind the filter see the Microchip Application Note AN4515 "Processing Analog Sensor Data with Digital Filtering" and the sources listed below.
+For the math behind the filter see the[Microchip Application Note AN4515: "Processing Analog Sensor Data with Digital Filtering"](https://ww1.microchip.com/downloads/en/Appnotes/ProcessAnalogSensorDataDigitalFiltering-DS00004515.pdf) and the sources listed below.
 
 
 The filter offers these filters:

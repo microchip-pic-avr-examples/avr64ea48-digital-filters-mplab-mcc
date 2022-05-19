@@ -1,7 +1,7 @@
 # EKF on AVR
 This repository contains the kalman-clib library implemented on an AVR64EA48. The original library can be found at https://github.com/sunsided/kalman-clib.
 
-Refer to the Microchip Application Note AN4515 "Processing Analog Sensor Data with Digital Filtering" for further details on the principle of the Kalman filter. The filter equations are introduced further down in this document as well.
+Refer to the [Microchip Application Note AN4515: "Processing Analog Sensor Data with Digital Filtering"](https://ww1.microchip.com/downloads/en/Appnotes/ProcessAnalogSensorDataDigitalFiltering-DS00004515.pdf) for further details on the principle of the Kalman filter. The filter equations are introduced further down in this document as well.
 
 ## Changes needed to the library for it to work on AVR
 1) Line 11 in matrix.h needs to change. "#define EXTERN_INLINE_MATRIX EXTERN_INLINE" -> "#define EXTERN_INLINE_MATRIX INLINE". This has to do with the change in the definition between static, extern and inline from GNU89 and GNU99, see https://stackoverflow.com/questions/216510/what-does-extern-inline-do/216546#216546 for more information. 
@@ -36,7 +36,7 @@ There are several examples in the project that can be looked at to see how to us
 
 ## Examples in this repo
 This repo contains a pre-made example located in the kalman_example_gravity which tries to estimate the gravitational acceleration based on some preloaded data. It is this example which is used to do the measurements given in the result section. The example has been slightly modified to toggle PB2 at the beginning and end of the init as well as at the beginning and end of each kalman filter iteration. This is used to create the Cycle measurements. 
-Refer to the Microchip Application Note AN4515 "Processing Analog Sensor Data with Digital Filtering" for a discussion of that code.
+Refer to the[Microchip Application Note AN4515: "Processing Analog Sensor Data with Digital Filtering"](https://ww1.microchip.com/downloads/en/Appnotes/ProcessAnalogSensorDataDigitalFiltering-DS00004515.pdf) for a discussion of that code.
 
 The kalman_example file is not a full example, but just shows how to use the Kalman Filter factories.  
 
@@ -79,7 +79,7 @@ To Use the Data Visualizer, click Load Workspace → Choose data_visualizer.dvws
 
 ## Standard Kalman Filter Equations
 After initialization, the _prediction_ and _update_ phases happen when the algorithm runs. The _update_ phase updates the variables based on the error it had from the _prediction_.
-Refer to the Microchip Application Note AN4515 "Processing Analog Sensor Data with Digital Filtering" for further details on the principle of the Kalman filter.
+Refer to the Microchip [Microchip Application Note AN4515: "Processing Analog Sensor Data with Digital Filtering"](https://ww1.microchip.com/downloads/en/Appnotes/ProcessAnalogSensorDataDigitalFiltering-DS00004515.pdf) for further details on the principle of the Kalman filter.
 
 ### Discrete Dynamic Equation
 

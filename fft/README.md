@@ -49,7 +49,7 @@ First, calculate `pwr`:
 pwr = sqrt(cpx_out[n].r * cpx_out[n].r + cpx_out[n].i * cpx_out[n].i);
 ```
 For each frequency bin `n`, the absolute value of the complex result vector `cpx_out[n]` is calculated from its real and imaginary components, `cpx_out[n].r` and `cpx_out[n].i`, respectively.
-When the device is connected to a PC, the MPLAB® Data Visualizer can be used for signal analysis. Refer to the Microchip Application Note AN4515 "Processing Analog Sensor Data with Digital Filtering" for further interpretation of the power spectrum.
+When the device is connected to a PC, the MPLAB® Data Visualizer can be used for signal analysis. Refer to the [Microchip Application Note AN4515: "Processing Analog Sensor Data with Digital Filtering"](https://ww1.microchip.com/downloads/en/Appnotes/ProcessAnalogSensorDataDigitalFiltering-DS00004515.pdf) for further interpretation of the power spectrum.
  
 ## Performance and Properties
 In comparison to other filter techniques, FFT is not easy on CPU load: depending on `nfft` (and the application’s requirements), the device’s CPU can be busy for a substantial time.

@@ -24,7 +24,8 @@ variableWrite_SendFrame(original, filtered);
 
 The green is the filtered signal and the blue is the original signal. Using the MPLAB® Data Visualizer to compare the two signals sent over the Universal Synchronous and Asynchronous Receiver and Transmitter - USART, there is a clear difference between the two. The median filter removes the spikes in the signal, and it becomes the median of the current signal and the previous samples. In this case, the filtered signal results in a cleaner sine wave.
 
-To Use the Data Visualizer, click Load Workspace → Choose data_visualizer.dvws
+To Use the Data Visualizer, click Load Workspace → Choose data_visualizer.dvws.
+Refer also to the [Microchip Application Note AN4515: "Processing Analog Sensor Data with Digital Filtering"](https://ww1.microchip.com/downloads/en/Appnotes/ProcessAnalogSensorDataDigitalFiltering-DS00004515.pdf).
 
 ## Performance and Properties
 The median filter has a selectable window size. This window size affects both the ability to filter and how long it takes to process.
@@ -53,7 +54,7 @@ for(i = 0; i < medianFilter->numNodes - 1; i++)
     it = it->nextValue;
 }
 ```
-## Implementation Explanation
+## Conclusion and Use Cases
 We have shown briefly how a median filter works and how to use it. We also demonstrated how to measure the cycle times for your application using an oscilloscope or logic analyzer.
 
 A median filter is a nice method for removing noise or peaks from the signal and can often be used as a preprocessing step in front of more advanced filters, like a Kalman filter. The difference between a Median filter and more advanced filters is that a Median filter does not fold the extreme values into the signal like in an average filter and therefore removes their impact on the signal.

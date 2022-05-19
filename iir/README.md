@@ -1,12 +1,11 @@
 
 # IIR Filter
 
+Infinite Impulse Response (IIR) filters are feedback-based filters, i.e., the previous output plays a role in the current output. Due to the feedback principle, these filters lose the phase information and might be unstable, so they are not always the first choice for audio applications. But for sensor readings, they can be a great tool. For this code example, a simple and flexible implementation of IIR was chosen, with emphasis on ease of use.
+For the math behind the filter see the Microchip Application Note AN4515 "Processing Analog Sensor Data with Digital Filtering" and the sources listed below.
 
-**MPLAB® X has been used to create this project.**
-Source: https://github.com/wooters/miniDSP and https://webaudio.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html
 
-
-The filter can be configured to use the filters below:
+The filter offers these filters:
 
 Filters                  | Enum                     |
 -----------------------  | -----------------------  | 
@@ -18,67 +17,34 @@ Peaking Band EQ Filter   | PEQ                      |
 Low Shelf Filter         | LSH                      |
 High Shelf Filter        | HSH                      |
 
-Note: *Only the initilization time of the filter will be affected when choosing the filter type.*
-
-## Cycle Times - Data types
-
-The filter can be configured to other data types, this can be done in `filters/biquad.h`
-
-```c
-/* whatever sample type you want */
-typedef float smp_type;
-
-```
-
-Can for example be changed to 
-```c
-/* whatever sample type you want */
-typedef double smp_type;
-
-```
-The cycle times accomplished when using `BiQuad(sinevalue, bq);` is listed below:
-
-type     | cycles | 
----------| ------ |
-float    | 252    |
-double   | 1440   |
-
-
-
-## Graph of audio signal
-
-Switch between for example Low Pass and Band pass by setting `FILTER_TYPE` to one of the configurations below:
+Select for example the Low Pass (`LPF`) by
 
 ```c
 #define FILTER_TYPE LPF
-
 ```
-or 
-```c
-#define FILTER_TYPE BPF
+Note: *Only the initialization time of the filter will be affected when choosing the filter type.*
 
-```
 
-Only Low Pass and Band Pass filter will be tested here:
-The green graph is the filtered result and the blue is the original. 
+
+## Examples
+Both Low Pass (`LPF`) and Band Pass (`BPF`) filter effects will be discussed here. In the plots, the green graph is the filtered result and the blue is the original. 
+
 ### Low Pass Filter
-
-A low pass filter is a filter that passes the signals lower than a certain frequency threshold _freq_ and attentuates / rejects the signal outside that range. Often, for filters with high/low discrimination, the term "bandwidth" denotes that frequency threshold (think of a low pass filter as a "bandpass from zero to _bandwidth_", and a high pass filter being a "band pass from _bandwidth_ to infinity"). Here, the variable _bandwidth_ determines the shape of the transition between high/low areas. 
-The variable _srate_ helps to determine the phase (_omega_) between samples.
+A low pass filter is a filter that passes the signals lower than a certain frequency threshold `freq` and attentuates / rejects the signal outside that range. Often, for filters with high/low discrimination, the term "bandwidth" denotes that frequency threshold (think of a low pass filter as a "bandpass from zero to _bandwidth_", and a high pass filter being a "band pass from _bandwidth_ to infinity"). Here, the variable `bandwidth` determines the shape of the transition between high/low areas. 
+The variable `srate` helps to determine the phase (Ω) between samples.
 
 
 ```c
     smp_type freq = 8.0;                    // Frequency in Hertz
     smp_type srate = 255.0;                 // Samples per second
-    smp_type bandwidth = 5.0;               // Bandwidth in Octaves
+    smp_type bandwidth = 5;               // Bandwidth in octaves
 ```
-Note that the bandwidth is configured in Octaves. 
-A calculator can be used here at the bottom of the page:
+Note that the bandwidth is configured in octaves. 
+A calculator can be used to find **Quality Factor**, see the bottom of the page here:
 http://www.sengpielaudio.com/calculator-cutoffFrequencies.htm
-to find **Quality Factor**.
-
-**Quality Factor** can be used to calculate bandwidth here:
-http://www.sengpielaudio.com/calculator-bandwidth.htm
+.
+That **Quality Factor** can be used to calculate a bandwidth here:
+http://www.sengpielaudio.com/calculator-bandwidth.htm .
 
 For example:
 ```
@@ -90,14 +56,11 @@ Quality Factor -> 1
 ![Low Pass Filter](images/lpf_audio.jpg)
 
 
-
-
 ### Band Pass Filter
 
 A band pass filter is a filter that rejects or attenuates signals outside of a certain frequency range and accepts it inside. 
 
-Ideally a band pass filter should not attentuate or amplify signals inside the range and completely remove the signal outside the frequency range. 
-The center frequency of the band pass filter is determined by _bandwidth
+Ideally, a band-pass filter does not attenuate or amplify signals inside the range and completely remove the signal outside the frequency range. The center frequency of the band-pass filter is determined by `bandwidth`.
 
 
 ```c
@@ -109,13 +72,14 @@ The center frequency of the band pass filter is determined by _bandwidth
 ![Band Pass Filter](images/bpf_audio.jpg)
 
 
-## Data Visualizer / Timing
+## Data Visualizer an Timing
 
-The graphing was done using MPLAB® Data Visualizer, which can be accomplished by updating **main.c**.  Config for **Data Visualizer** can be found in the project called `data_visualizer.json`.
+The graphing was done using MPLAB® Data Visualizer, which can be accomplished by updating **main.c**.  A configuration for **Data Visualizer** can be found in the project called `data_visualizer.json`.
 
-The config can be loaded by clicking "*Load Workspace*" at the top of the Data Visualizer and connecting to the correct COM-port.
+The configuration can be loaded by clicking "*Load Workspace*" at the top of the Data Visualizer and connecting to the correct COM-port.
 
-Toggling of **PB2** is done to time the iir filter when setting **ONLY_SEND_USART** to:
+
+Toggling of **PB2** is done to time the IIR filter when setting **`ONLY_SEND_USART`** to:
 ```c
 #define ONLY_SEND_USART 0
 ```
@@ -124,13 +88,26 @@ Sending over USART with **115200** baud rate, is done using:
 ```c
 #define ONLY_SEND_USART 1
 ```
-
 Two values are here sent:
 ```
 original value: uint8_t
 new value: float32
 ```
+## Performance and Properties
+### Performance
+The cycle time of the IIR filter is depending on the exact configuration. For `float` data type we observe
+|Data Type|Cycles|
+|---|---|
+|`float`|1280|
+Some combinations of compiler and device architecture support changing the size of `double`, e.g., from 32-bit to 64-bit. An increase improves the precision, but with a cost of a slower run-time. Integers will not work with this implementation.
 
+Use the type definition `typedef float smp_type;` in `biquad.h` to change the data type in the filter implementation. The compiler may require additional arguments, such as `-fno-short-double`. See the compiler’s documentation for details.
 
+### Conclusions
+We have demonstrated how to use a biquadratic IIR filter on AVR devices. In addition, we have introduced how to time the filter in the code. The IIR, as applied here, offers several filtering options. Depending on the application, IIR can be used to reject noise or offset variations, which helps to isolate the desired signal component. Thanks to its rather low CPU load, the IIR can easily fit into load- or timing-sensitive applications.
 
-
+## Sources
+- http://musicweb.ucsd.edu/%7Etrsmyth/filters/Biquad_Section.html
+- https://github.com/wooters/miniDSP 
+- https://webaudio.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html
+**MPLAB® X has been used to create this project.**

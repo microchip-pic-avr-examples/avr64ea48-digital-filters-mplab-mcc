@@ -11,7 +11,7 @@
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+ï¿½ [2022] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -91,7 +91,7 @@ int main(void)
         {
             sinevalue = sinewave[i++];
 			
-			// PC2 used for measuring cycles used in filter
+			// PB2 used for measuring cycles used in filter
             PORTB.OUTSET = PIN2_bm;
             filtered = BiQuad(sinevalue, bq);
             PORTB.OUTCLR = PIN2_bm;

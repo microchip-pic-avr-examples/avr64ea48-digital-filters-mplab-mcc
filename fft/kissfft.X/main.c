@@ -32,11 +32,11 @@
 */
 #include "mcc_generated_files/system/system.h"
 #include "mcc_generated_files/data_streamer/data_streamer.h"
-#include <avr/io.h>
+/* #include <avr/io.h>*/ 
 #include "filter/kiss_fftr.h" 
 #include "filter/sine.h"
 #include <math.h>
-#include <util/delay.h>
+
 
 
 
@@ -60,7 +60,7 @@ int main(void)
     volatile int16_t watch_imag = 35;
     volatile uint32_t pwr;
     volatile uint16_t cnt=0;
-	PORTD.DIRSET = PIN6_bm; // Make PD6 an output
+	
     PORTD.OUTSET = PIN6_bm; // Make PD6 output logic high
     kiss_fftr(cfg, cpx_in , cpx_out);      // The actual FFT operation
     PORTD.OUTCLR = PIN6_bm; // Make PD6 output logic low

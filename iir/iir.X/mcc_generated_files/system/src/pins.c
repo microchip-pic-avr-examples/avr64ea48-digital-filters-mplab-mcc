@@ -36,12 +36,13 @@
 
 static void (*PC1_InterruptHandler)(void);
 static void (*PC0_InterruptHandler)(void);
+static void (*PB2_InterruptHandler)(void);
 
 void PIN_MANAGER_Initialize()
 {
   /* DIR Registers Initialization */
     PORTA.DIR = 0x0;
-    PORTB.DIR = 0x0;
+    PORTB.DIR = 0x4;
     PORTC.DIR = 0x1;
     PORTD.DIR = 0x0;
     PORTE.DIR = 0x0;
@@ -119,6 +120,7 @@ void PIN_MANAGER_Initialize()
   // register default ISC callback functions at runtime; use these methods to register a custom function
     PC1_SetInterruptHandler(PC1_DefaultInterruptHandler);
     PC0_SetInterruptHandler(PC0_DefaultInterruptHandler);
+    PB2_SetInterruptHandler(PB2_DefaultInterruptHandler);
 }
 
 /**
@@ -147,6 +149,19 @@ void PC0_DefaultInterruptHandler(void)
     // add your PC0 interrupt custom code
     // or set custom function using PC0_SetInterruptHandler()
 }
+/**
+  Allows selecting an interrupt handler for PB2 at application runtime
+*/
+void PB2_SetInterruptHandler(void (* interruptHandler)(void)) 
+{
+    PB2_InterruptHandler = interruptHandler;
+}
+
+void PB2_DefaultInterruptHandler(void)
+{
+    // add your PB2 interrupt custom code
+    // or set custom function using PB2_SetInterruptHandler()
+}
 ISR(PORTA_PORT_vect)
 { 
     /* Clear interrupt flags */
@@ -155,6 +170,11 @@ ISR(PORTA_PORT_vect)
 
 ISR(PORTB_PORT_vect)
 { 
+    // Call the interrupt handler for the callback registered at runtime
+    if(VPORTB.INTFLAGS & PORT_INT2_bm)
+    {
+       PB2_InterruptHandler(); 
+    }
     /* Clear interrupt flags */
     VPORTB.INTFLAGS = 0xff;
 }

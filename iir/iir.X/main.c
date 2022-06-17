@@ -46,8 +46,6 @@ int main(void)
     SYSTEM_Initialize();
     
     
-    // PB2 to measure time used in biquad filter
-	PORTB.DIRSET = PIN2_bm;
     
     smp_type dbGain = 1.0;
     smp_type freq;
@@ -76,14 +74,15 @@ int main(void)
     float filtered;
     while(1)
     {
-        PORTB.DIRSET = PIN2_bm;
+        
         if(ONLY_SEND_USART)
         {
             
 
             sinevalue = sinewave[i++];
-			// PC2 used for measuring cycles used in filter
+			// PB2 used for measuring cycles used in filter
 			PORTB.OUTSET = PIN2_bm;
+            
             filtered = BiQuad(sinevalue, bq);
 			PORTB.OUTCLR = PIN2_bm;
            

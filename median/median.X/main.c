@@ -54,8 +54,7 @@ int main(void)
 	medianFilter.medianBuffer = medianBuffer;
 	MEDIANFILTER_Init(&medianFilter);
 	
-	PORTD.DIRSET = PIN6_bm; // Make PD3 an output
-
+	
     while(1)
     {
         

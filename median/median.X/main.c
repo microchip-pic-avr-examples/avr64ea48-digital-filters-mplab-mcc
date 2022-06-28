@@ -60,10 +60,10 @@ int main(void)
         
 		original = sinewave[i++];
         _delay_ms(100);
-		// Using PINs to measure duration of median filter
-        PORTD.OUTSET = PIN6_bm; // Make PD6 output logic low
+		// Using pin PD6 to measure duration of median filter
+        IO_PD6_SetHigh(); // Make PD6 output logic high
         filtered = MEDIANFILTER_Insert(&medianFilter, original);
-        PORTD.OUTCLR = PIN6_bm; // Make PD6 output logic high
+        IO_PD6_SetLow(); // Make PD6 output logic low
         		
         // sending data over usart
         variableWrite_SendFrame(original, filtered);

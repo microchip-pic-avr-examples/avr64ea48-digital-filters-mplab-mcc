@@ -74,6 +74,24 @@
 #define IO_PC0_DisableDigitalInputBuffer() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
 #define IO_PC0_EnableInterruptForLowLevelSensing() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
 
+//get/set IO_PB1 aliases
+#define IO_PB1_SetHigh() do { PORTB_OUTSET = 0x2; } while(0)
+#define IO_PB1_SetLow() do { PORTB_OUTCLR = 0x2; } while(0)
+#define IO_PB1_Toggle() do { PORTB_OUTTGL = 0x2; } while(0)
+#define IO_PB1_GetValue() (VPORTB.IN & (0x1 << 1))
+#define IO_PB1_SetDigitalInput() do { PORTB_DIRCLR = 0x2; } while(0)
+#define IO_PB1_SetDigitalOutput() do { PORTB_DIRSET = 0x2; } while(0)
+#define IO_PB1_SetPullUp() do { PORTB_PIN1CTRL  |= PORT_PULLUPEN_bm; } while(0)
+#define IO_PB1_ResetPullUp() do { PORTB_PIN1CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
+#define IO_PB1_SetInverted() do { PORTB_PIN1CTRL  |= PORT_INVEN_bm; } while(0)
+#define IO_PB1_ResetInverted() do { PORTB_PIN1CTRL  &= ~PORT_INVEN_bm; } while(0)
+#define IO_PB1_DisableInterruptOnChange() do { PORTB.PIN1CTRL = (PORTB.PIN1CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
+#define IO_PB1_EnableInterruptForBothEdges() do { PORTB.PIN1CTRL = (PORTB.PIN1CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
+#define IO_PB1_EnableInterruptForRisingEdge() do { PORTB.PIN1CTRL = (PORTB.PIN1CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
+#define IO_PB1_EnableInterruptForFallingEdge() do { PORTB.PIN1CTRL = (PORTB.PIN1CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
+#define IO_PB1_DisableDigitalInputBuffer() do { PORTB.PIN1CTRL = (PORTB.PIN1CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
+#define IO_PB1_EnableInterruptForLowLevelSensing() do { PORTB.PIN1CTRL = (PORTB.PIN1CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
+
 //get/set IO_PD6 aliases
 #define IO_PD6_SetHigh() do { PORTD_OUTSET = 0x40; } while(0)
 #define IO_PD6_SetLow() do { PORTD_OUTCLR = 0x40; } while(0)
@@ -141,6 +159,27 @@ void PC0_DefaultInterruptHandler(void);
  * @return none
  */
 void PC0_SetInterruptHandler(void (* interruptHandler)(void)) ; 
+
+/**
+ * @ingroup  pinsdriver
+ * @brief Default Interrupt Handler for PB1 pin. 
+ *        This is a predefined interrupt handler to be used together with the PB1_SetInterruptHandler() method.
+ *        This handler is called every time the PB1 ISR is executed. 
+ * @pre PIN_MANAGER_Initialize() has been called at least once
+ * @param none
+ * @return none
+ */
+void PB1_DefaultInterruptHandler(void);
+
+/**
+ * @ingroup  pinsdriver
+ * @brief Interrupt Handler Setter for PB1 pin input-sense-config functionality.
+ *        Allows selecting an interrupt handler for PB1 at application runtime
+ * @pre PIN_MANAGER_Initialize() has been called at least once
+ * @param InterruptHandler function pointer.
+ * @return none
+ */
+void PB1_SetInterruptHandler(void (* interruptHandler)(void)) ; 
 
 /**
  * @ingroup  pinsdriver

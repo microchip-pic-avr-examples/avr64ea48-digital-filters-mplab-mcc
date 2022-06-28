@@ -81,25 +81,24 @@ int main(void)
 
             sinevalue = sinewave[i++];
 			// PB2 used for measuring cycles used in filter
-			PORTB.OUTSET = PIN2_bm;
+			IO_PB2_SetHigh();
             
             filtered = BiQuad(sinevalue, bq);
-			PORTB.OUTCLR = PIN2_bm;
-           
+			IO_PB2_SetLow();
             // sending original and filtered value
             variableWrite_SendFrame(sinevalue, filtered);
         {
             sinevalue = sinewave[i++];
 			
 			// PB2 used for measuring cycles used in filter
-            PORTB.OUTSET = PIN2_bm;
+            IO_PB2_SetHigh();
             filtered = BiQuad(sinevalue, bq);
-            PORTB.OUTCLR = PIN2_bm;
+            IO_PB2_SetLow();
             
             // sending original and filtered value
             variableWrite_SendFrame(sinevalue, filtered);
         }
-		PORTB.DIRCLR = PIN2_bm;
+		IO_PB2_SetDigitalInput();
     }    
 }
 }

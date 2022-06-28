@@ -36,7 +36,6 @@
 
 static void (*PC1_InterruptHandler)(void);
 static void (*PC0_InterruptHandler)(void);
-static void (*PD6_InterruptHandler)(void);
 
 void PIN_MANAGER_Initialize()
 {
@@ -44,7 +43,7 @@ void PIN_MANAGER_Initialize()
     PORTA.DIR = 0x0;
     PORTB.DIR = 0x0;
     PORTC.DIR = 0x1;
-    PORTD.DIR = 0x40;
+    PORTD.DIR = 0x0;
     PORTE.DIR = 0x0;
     PORTF.DIR = 0x0;
 
@@ -120,7 +119,6 @@ void PIN_MANAGER_Initialize()
   // register default ISC callback functions at runtime; use these methods to register a custom function
     PC1_SetInterruptHandler(PC1_DefaultInterruptHandler);
     PC0_SetInterruptHandler(PC0_DefaultInterruptHandler);
-    PD6_SetInterruptHandler(PD6_DefaultInterruptHandler);
 }
 
 /**
@@ -148,19 +146,6 @@ void PC0_DefaultInterruptHandler(void)
 {
     // add your PC0 interrupt custom code
     // or set custom function using PC0_SetInterruptHandler()
-}
-/**
-  Allows selecting an interrupt handler for PD6 at application runtime
-*/
-void PD6_SetInterruptHandler(void (* interruptHandler)(void)) 
-{
-    PD6_InterruptHandler = interruptHandler;
-}
-
-void PD6_DefaultInterruptHandler(void)
-{
-    // add your PD6 interrupt custom code
-    // or set custom function using PD6_SetInterruptHandler()
 }
 ISR(PORTA_PORT_vect)
 { 
@@ -191,11 +176,6 @@ ISR(PORTC_PORT_vect)
 
 ISR(PORTD_PORT_vect)
 { 
-    // Call the interrupt handler for the callback registered at runtime
-    if(VPORTD.INTFLAGS & PORT_INT6_bm)
-    {
-       PD6_InterruptHandler(); 
-    }
     /* Clear interrupt flags */
     VPORTD.INTFLAGS = 0xff;
 }

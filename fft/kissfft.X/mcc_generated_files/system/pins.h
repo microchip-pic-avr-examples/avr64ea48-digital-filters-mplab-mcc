@@ -35,7 +35,7 @@
 #ifndef PINS_H_INCLUDED
 #define PINS_H_INCLUDED
 
-
+#include <avr/io.h>
 #include "./port.h"
 
 //get/set IO_PC1 aliases

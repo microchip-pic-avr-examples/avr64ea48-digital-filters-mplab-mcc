@@ -38,8 +38,6 @@
 #include <math.h>
 
 
-
-
 int main(void)
 {
    SYSTEM_Initialize();
@@ -61,9 +59,9 @@ int main(void)
     volatile uint32_t pwr;
     volatile uint16_t cnt=0;
 	
-    PORTD.OUTSET = PIN6_bm; // Make PD6 output logic high
+    IO_PD6_SetHigh(); // Make PD6 output logic high
     kiss_fftr(cfg, cpx_in , cpx_out);      // The actual FFT operation
-    PORTD.OUTCLR = PIN6_bm; // Make PD6 output logic low
+    IO_PD6_SetLow(); // Make PD6 output logic low
     while(1)
     {
   

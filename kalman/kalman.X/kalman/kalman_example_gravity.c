@@ -15,6 +15,7 @@
 */
 #include "../mcc_generated_files/data_streamer/data_streamer.h"
 #include "../mcc_generated_files/uart/usart1.h"
+#include "../mcc_generated_files/system/pins.h"
 #include <avr/io.h>
 
 #include <assert.h>
@@ -158,13 +159,11 @@ static matrix_data_t measurement_error[MEAS_COUNT] = {
 */
 void kalman_gravity_demo()
 {	
-	PORTD.DIRSET = PIN6_bm;
-
 	
 	// initialize the filter
-	PORTD.OUTSET = PIN6_bm;
+	IO_PD6_SetHigh();
 	kalman_gravity_init();
-	PORTD.OUTCLR = PIN6_bm;
+	IO_PD6_SetLow();
 	
 	// fetch structures
 	kalman_t *kf = &kalman_filter_gravity;
@@ -176,7 +175,7 @@ void kalman_gravity_demo()
 	// filter!
 	for (int i = 0; i < MEAS_COUNT; ++i)
 	{
-		PORTD.OUTSET = PIN6_bm;
+		IO_PD6_SetHigh();
 		// prediction.
 		kalman_predict(kf);
 		// x[0] -> s_i -> estimate next position
@@ -186,13 +185,12 @@ void kalman_gravity_demo()
 		// measure ...
 		matrix_data_t measurement = real_distance[i] + measurement_error[i];
 		// reading position as float -> converting to uint8 array
-		volatile uint8_t* measurement_b = (uint8_t*) &measurement;
 		matrix_set(z, 0, 0, measurement);
 
 		// update
 		kalman_correct(kf, kfm);
-		PORTD.OUTCLR = PIN6_bm;
-		PORTD.DIRCLR = PIN6_bm;
+		IO_PD6_SetLow();
+
 
 	}
 	
@@ -207,12 +205,10 @@ void kalman_gravity_demo()
 */
 void kalman_gravity_demo_usart()
 {
-	PORTD.DIRSET = PIN6_bm;
-
 	// initialize the filter
-	PORTD.OUTSET = PIN6_bm;
+	IO_PD6_SetHigh();
 	kalman_gravity_init();
-	PORTD.OUTCLR = PIN6_bm;
+	IO_PD6_SetLow();
 
 	// fetch structures
 	kalman_t *kf = &kalman_filter_gravity;
@@ -224,36 +220,28 @@ void kalman_gravity_demo_usart()
 	// filter!
 	for (int i = 0; i < MEAS_COUNT; ++i)
 	{
-        while(!USART1_IsTxReady());
-		USART1_Write(0x03);
-		PORTD.OUTSET = PIN6_bm;
+        IO_PD6_SetHigh();
 		// prediction.
 		kalman_predict(kf);
 		// x[0] -> s_i -> estimate next position
 		// x[1] -> v_i -> estimate next velocity
 		// g[2] -> g_i -> estimate next gravity
 		
-		volatile uint8_t* state_b = (uint8_t*)&x->data[0];
-		volatile uint8_t* velocity_b = (uint8_t*)&x->data[1];
-		volatile uint8_t* gravity_b = (uint8_t*)&x->data[2];
-		variableWrite_SendValue(state_b, sizeof(matrix_data_t));
-		variableWrite_SendValue(velocity_b, sizeof(matrix_data_t));
-		variableWrite_SendValue(gravity_b, sizeof(matrix_data_t));
-		
+		volatile float state_f = *(&x->data[0]);
+		volatile float velocity_f = *(&x->data[1]);
+		volatile float gravity_f = *(&x->data[2]);
+
 		// measure ...
 		matrix_data_t measurement = real_distance[i] + measurement_error[i];
 		// reading position as float -> converting to uint8 array
-		volatile uint8_t* measurement_b = (uint8_t*) &measurement;
-		variableWrite_SendValue(measurement_b, sizeof(matrix_data_t));
+		volatile float measurement_f = *(&measurement);
+        variableWrite_SendFrame(state_f, velocity_f, gravity_f, measurement_f);
 		matrix_set(z, 0, 0, measurement);
 
 		// update
 		kalman_correct(kf, kfm);
-		PORTD.OUTCLR = PIN6_bm;
-        while(!USART1_IsTxReady());
-		USART1_Write(0xFC);
-
-		PORTD.DIRCLR = PIN6_bm;
+		IO_PD6_SetLow();
+        
 	}
 	
 

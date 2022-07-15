@@ -4,8 +4,8 @@
     "content": {
         "metaDataVersion": "1.3.0",
         "name": "com.microchip.mcu8.mplabx.project.avr64ea48-digital-filters-mplab-mcc",
-        "version": " ",
-        "displayName": "",
+        "version": "1.0.0",
+        "displayName": "Digital Filters using MPLAB X",
         "projectName": "avr64ea48-digital-filters-mplab-mcc",
         "shortDescription": "Demo of digital filters median IIR FFT and Kalman on AVR EA microcontrollerusing MPLAB X",
         "ide": {
@@ -15,7 +15,7 @@
         "compiler": [
             {
                 "name": "XC8",
-                "semverRange": "^2.32.0"
+                "semverRange": "^2.3.0"
             }
         ],
         "dfp": {

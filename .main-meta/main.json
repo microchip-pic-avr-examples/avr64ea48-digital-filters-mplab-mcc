@@ -7,7 +7,7 @@
         "version": "1.0.0",
         "displayName": "Digital Filters using MPLAB X",
         "projectName": "avr64ea48-digital-filters-mplab-mcc",
-        "shortDescription": "Demo of digital filters median IIR FFT and Kalman on AVR EA microcontrollerusing MPLAB X",
+        "shortDescription": "Demo of digital filters median IIR FFT and Kalman on AVR EA microcontroller using MPLAB X",
         "ide": {
             "name": "MPLAB X",
             "semverRange": ">=6.0.0"
@@ -15,7 +15,7 @@
         "compiler": [
             {
                 "name": "XC8",
-                "semverRange": "^2.3.0"
+                "semverRange": "^2.4.0"
             }
         ],
         "dfp": {

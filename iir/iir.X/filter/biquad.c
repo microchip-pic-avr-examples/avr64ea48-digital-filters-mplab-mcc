@@ -1,6 +1,5 @@
 /* 
  * File:   biquad.c
- * Author: M53740
  *
  * Created on 20. juli 2021, 10:03
  */

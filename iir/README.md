@@ -95,10 +95,7 @@ new value: float32
 ```
 ## Performance and Properties
 ### Performance
-The cycle time of the IIR filter is depending on the exact configuration. For `float` data type we observe
-|Data Type|Cycles|
-|---|---|
-|`float`|1280|
+The cycle time of the IIR filter is depending on the exact configuration. For `float` data type we observe 1280 cycles.
 Some combinations of compiler and device architecture support changing the size of `double`, e.g., from 32-bit to 64-bit. An increase improves the precision, but with a cost of a slower run-time. Integers will not work with this implementation.
 
 Use the type definition `typedef float smp_type;` in `biquad.h` to change the data type in the filter implementation. The compiler may require additional arguments, such as `-fno-short-double`. See the compiler’s documentation for details.

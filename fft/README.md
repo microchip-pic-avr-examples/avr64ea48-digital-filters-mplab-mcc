@@ -69,7 +69,7 @@ The measured duration can be converted to ‘number of FFT per MHz’ to compare
 
 When the device or the required tools are not accessible, you can use MPLAB X to measure the speed of the algorithm on a simulated AVR device. This approach provides a quick and easy estimation over the upper theoretical performance limit.
 
-The following table lists measured performance done on the Curiosity Nano:
+The following table is listing performance measured on the Curiosity Nano with a logic analyzer:
 
 | `nfft`|Cycles per FFT|
 |------:|-------------:|
@@ -101,4 +101,4 @@ The other aspect is that frequency bins are often labelled with a single frequen
 https://github.com/mborgerding/kissfft
 	<br>(Note: "kiss-FFT" is a wrapper of kissFFT for Android, and gets a lot of search engine hits)
 - Code example for MPLAB X and AVR64EA48 is  here:
-https://bitbucket.microchip.com/projects/EBE/repos/avr64ea48-digital-filters-mplab-mcc
+https://github.com/microchip-pic-avr-examples/avr64ea48-digital-filters-mplab-mcc

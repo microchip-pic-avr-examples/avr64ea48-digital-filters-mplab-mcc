@@ -10,7 +10,7 @@
         "shortDescription": "Demo of digital filters median IIR FFT and Kalman on AVR EA microcontroller using MPLAB X",
         "ide": {
             "name": "MPLAB X",
-            "semverRange": ">=6.00.0"
+            "semverRange": ">=6.0.0"
         },
         "compiler": [
             {
